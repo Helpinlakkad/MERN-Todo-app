@@ -13,29 +13,31 @@ exports.createTodo = async (req, res, next) => {
 };
 
 exports.updateTodo = async (req, res, next) => {
-  let item = await todoModel.findById(req.params.id);
+  const {_id,text} = req.body
+  let item = await todoModel.findById(_id);
   if (!item) {
     res.status(200).json({
       success: false,
     });
   }
 
-  item = await todoModel
-    .findByIdAndUpdate(req.params.id, req.body)
+  await todoModel
+    .findByIdAndUpdate(_id, {text})
     .then((data) => {
       res.status(201).send(data);
     });
 };
 
 exports.deleteTodo = async (req, res, next) => {
-  let item = await todoModel.findById(req.params.id);
+  const {_id} = req.body
+  let item = await todoModel.findById(_id);
   if (!item) {
     res.status(200).json({
       success: false,
     });
   }
 
-  await todoModel.findByIdAndDelete(req.params.id).then(() => {
+  await todoModel.findByIdAndDelete(_id).then(() => {
     res.json({
       success: true,
     })

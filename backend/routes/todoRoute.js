@@ -7,9 +7,9 @@ router.route("/getAllTodo").get(getAllTodo);
 
 router.route("/createTodo").post(createTodo);
 
-router.route("/updateTodo/:id").put(updateTodo);
+router.route("/updateTodo").post(updateTodo);
 
-router.route("/deleteTodo/:id").delete(deleteTodo);
+router.route("/deleteTodo").post(deleteTodo);
 
 
 
